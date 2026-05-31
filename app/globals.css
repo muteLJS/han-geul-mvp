@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── 학교안심 바른바탕 ───────────────────────────────── */
+@font-face {
+  font-family: "BaRunBatang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-03@1.0/BarunBatang.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── 조선일보명조체 ─────────────────────────────────── */
+@font-face {
+  font-family: "ChosunMyeongjo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/ChosunMyeongjo.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Tailwind v4 테마 커스터마이징 ─────────────────── */
+@theme {
+  /* 폰트 */
+  --font-sans: "BaRunBatang", "Noto Sans KR", sans-serif;
+  --font-editor: "ChosunMyeongjo", "Noto Serif KR", serif;
+
+  /* 컬러 — 배경·텍스트 */
+  --color-hanji: #faf6ee;
+  --color-ink: #1a1a1a;
+  --color-ink-light: #4a4a4a;
+  --color-border: #e5ddd0;
+
+  /* 오방색 — 기능 포인트 컬러 */
+  --color-cheong: #3b82c4;
+  --color-cheong-light: #dbeafe;
+  --color-baek: #f5f0e8;
+  --color-jeok: #c94040;
+  --color-jeok-light: #fde8e8;
+  --color-heuk: #2c2c2c;
+  --color-hwang: #d4a017;
+  --color-hwang-light: #fef3c7;
+
+  /* 반응형 */
+  --breakpoint-xs: 375px;
 }
 
+/* ── 전역 기본값 ─────────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-hanji);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* ── 글쓰기 에디터 전용 폰트 ────────────────────────── */
+.font-editor {
+  font-family: var(--font-editor);
+}
+
+/* ── 스크롤바 ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+/* ── 선택 색상 ───────────────────────────────────────── */
+::selection {
+  background-color: var(--color-cheong-light);
+  color: var(--color-ink);
+}
+
+/* ── PWA 하단 Safe Area ──────────────────────────────── */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
