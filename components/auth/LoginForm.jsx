@@ -21,18 +21,23 @@ export default function LoginForm() {
     setLoading(true);
     setError("");
 
-    const res = await signIn("credentials", {
-      email: form.email,
-      password: form.password,
-      redirect: false,
-    });
+    try {
+      const res = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: false,
+      });
 
-    setLoading(false);
-    if (res?.error) {
-      setError("이메일 또는 비밀번호가 올바르지 않습니다.");
-    } else {
-      router.push("/");
-      router.refresh();
+      if (res?.error) {
+        setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+      } else {
+        router.push("/");
+        router.refresh();
+      }
+    } catch {
+      setError("로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -41,34 +46,38 @@ export default function LoginForm() {
     setLoading(true);
     setError("");
 
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: form.name, email: form.email, password: form.password }),
-    });
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, password: form.password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
+      if (!res.ok) {
+        setError(data.error ?? "회원가입에 실패했습니다.");
+        return;
+      }
+
+      // 가입 후 자동 로그인
+      const loginRes = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: false,
+      });
+
+      if (loginRes?.error) {
+        setError("가입 완료. 로그인해주세요.");
+        setTab("login");
+      } else {
+        router.push("/");
+        router.refresh();
+      }
+    } catch {
+      setError("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
       setLoading(false);
-      setError(data.error ?? "회원가입에 실패했습니다.");
-      return;
-    }
-
-    // 가입 후 자동 로그인
-    const loginRes = await signIn("credentials", {
-      email: form.email,
-      password: form.password,
-      redirect: false,
-    });
-
-    setLoading(false);
-    if (loginRes?.error) {
-      setError("가입은 완료되었지만 로그인에 실패했습니다. 다시 로그인해주세요.");
-      setTab("login");
-    } else {
-      router.push("/");
-      router.refresh();
     }
   }
 
