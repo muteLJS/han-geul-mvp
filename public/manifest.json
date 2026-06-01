@@ -1,0 +1,35 @@
+{
+  "name": "한-글 | 하루에 한 자씩. 한 글로-",
+  "short_name": "한-글",
+  "description": "쓰면서 배우고, 쌓으면서 성장하는 한국어 글쓰기 에듀테크 플랫폼",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF6EE",
+  "theme_color": "#FAF6EE",
+  "lang": "ko",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "글쓰기",
+      "short_name": "글쓰기",
+      "description": "새 글 작성하기",
+      "url": "/write",
+      "icons": [{ "src": "/icons/icon-192x192.svg", "sizes": "192x192" }]
+    }
+  ]
+}

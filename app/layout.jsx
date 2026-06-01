@@ -4,6 +4,20 @@ export const metadata = {
   title: "한-글 | 하루에 한 자씩. 한 글로-",
   description: "쓰면서 배우고, 쌓으면서 성장하는 한국어 글쓰기 에듀테크 플랫폼",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "한-글",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    title: "한-글 | 하루에 한 자씩. 한 글로-",
+    description: "쓰면서 배우고, 쌓으면서 성장하는 한국어 글쓰기 에듀테크 플랫폼",
+    siteName: "한-글",
+  },
 };
 
 export const viewport = {
