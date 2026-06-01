@@ -36,10 +36,11 @@ export async function GET(req) {
     });
   }
 
-  // 내부 결과 없으면 우리말샘 API 조회
+  // 내부 결과 없으면 우리말샘 API(또는 목업) 조회
   try {
     const apiResults = await searchUrimalsam(q, 5);
-    return NextResponse.json({ results: apiResults, source: "urimalsam" });
+    const source = apiResults[0]?.source === "mock" ? "mock" : "urimalsam";
+    return NextResponse.json({ results: apiResults, source });
   } catch {
     return NextResponse.json({ results: [], source: "internal" });
   }
