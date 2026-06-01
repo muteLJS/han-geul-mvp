@@ -1,5 +1,5 @@
 import { signIn } from "@/lib/auth";
-import Image from "next/image";
+import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata = {
   title: "로그인 | 한-글",
@@ -34,7 +34,7 @@ export default function LoginPage() {
           <p className="mt-2 text-sm text-ink-light">하루에 한 자씩. 한 글로-</p>
         </div>
 
-        {/* 소셜 로그인 버튼 */}
+        {/* 소셜 로그인 */}
         <div className="w-full flex flex-col gap-3">
           <SocialButton
             provider="google"
@@ -70,6 +70,16 @@ export default function LoginPage() {
             <span className="font-bold text-base leading-none">N</span>
           </SocialButton>
         </div>
+
+        {/* 구분선 */}
+        <div className="w-full flex items-center gap-3">
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-xs text-ink-light">또는</span>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+
+        {/* 이메일 로그인/회원가입 (클라이언트 컴포넌트) */}
+        <LoginForm />
 
         <p className="text-xs text-ink-light text-center leading-relaxed">
           로그인하면 한-글의{" "}

@@ -1,4 +1,5 @@
 import "./globals.css";
+import SessionProvider from "@/components/auth/SessionProvider";
 
 export const metadata = {
   title: "한-글 | 하루에 한 자씩. 한 글로-",
@@ -31,7 +32,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className="h-full">
       <body className="min-h-full flex flex-col font-sans antialiased">
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

@@ -19,7 +19,8 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true, lowercase: true },
     name: { type: String, required: true },
     image: { type: String, default: null },
-    provider: { type: String, required: true },
+    provider: { type: String, required: true }, // 'google' | 'kakao' | 'naver' | 'credentials'
+    passwordHash: { type: String, default: null }, // credentials 전용
     role: { type: String, enum: ["user", "admin"], default: "user" },
     subscription: { type: SubscriptionSchema, default: () => ({}) },
     writingGoal: { type: Number, default: 100 },
